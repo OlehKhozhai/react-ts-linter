@@ -1,6 +1,12 @@
 import React from 'react';
-import style from 'components/_common/Header/Header.module.scss';
+import SearchPanel from 'components/_common/SearchPanel/SearchPanel';
+import style from './Header.module.scss';
 
-const Header = () => <h2 className={style.root}>Header</h2>;
+const Header = () => (
+  <header className={style.root}>
+    <h2>Drivers * 232</h2>
+    <SearchPanel />
+  </header>
+);
 
 export default Header;

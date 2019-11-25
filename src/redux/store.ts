@@ -1,10 +1,20 @@
-import { combineReducers, createStore } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { reducer as reduxFormReducer } from 'redux-form';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './saga';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-  form: formReducer,
+  form: reduxFormReducer,
 });
 
-const store = createStore(rootReducer);
+const middleware: any[] = [sagaMiddleware];
+const enhancer = composeWithDevTools(applyMiddleware(...middleware));
+
+const store = createStore(rootReducer, enhancer);
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
