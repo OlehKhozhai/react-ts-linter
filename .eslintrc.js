@@ -50,6 +50,7 @@ module.exports = {
     'react/no-array-index-key': 0,
     'react/prefer-stateless-function': [1],
     'react/no-string-refs': 2,
+    'react/prop-types': 0,
     'react/jsx-no-bind': [
       2,
       {
