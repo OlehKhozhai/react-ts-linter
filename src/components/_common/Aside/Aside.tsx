@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import Logo from 'assets/img/logo.svg';
 import { Link } from 'react-router-dom';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,45 +8,35 @@ import Drawer from '@material-ui/core/Drawer';
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
+
+import useStyles from 'components/_common/Aside/AsideClasses';
+import Logo from 'assets/img/logo.svg';
+import { dispatchersTopRoutes } from './helpers';
 import styles from './Aside.module.scss';
 
 interface IProps {}
 
-const dispatchersTopRoutes = [
-  { title: 'Drivers list', path: '/drivers', icon: 'list' },
-  { title: 'Fleet', path: '/fleet', icon: 'toll' },
-  { title: 'Orders', path: '/orders', icon: 'toc' },
-];
+const Aside: FC<any> = ({ isSidebarOpen, handleSidebarClose }) => {
+  const classes = useStyles();
 
-const dispatchersBottomRoutes = [
-  {
-    title: 'Notifications',
-    path: '/notifications',
-    icon: 'notifications_none',
-  },
-  { title: 'Settings', path: '/settings', icon: 'settings_applications' },
-  { title: 'Nick Jackson', path: '/profile', icon: 'accessibility_new' },
-];
-
-const Aside: FC<any> = ({ status, handleDrawerClose, classes }) => {
   return (
     <Drawer
       variant="permanent"
       className={clsx(classes.drawer, {
-        [classes.drawerOpen]: status,
-        [classes.drawerClose]: !status,
+        [classes.drawerOpen]: isSidebarOpen,
+        [classes.drawerClose]: !isSidebarOpen,
       })}
       classes={{
         paper: clsx({
-          [classes.drawerOpen]: status,
-          [classes.drawerClose]: !status,
+          [classes.drawerOpen]: isSidebarOpen,
+          [classes.drawerClose]: !isSidebarOpen,
         }),
       }}
-      open={status}
+      open={isSidebarOpen}
     >
       <div className={classes.toolbar}>
         <img src={Logo} alt="logo" width="24" className={styles.logo} />
-        <IconButton onClick={handleDrawerClose}>
+        <IconButton onClick={handleSidebarClose}>
           <i className="material-icons md-24">dehaze</i>
         </IconButton>
       </div>

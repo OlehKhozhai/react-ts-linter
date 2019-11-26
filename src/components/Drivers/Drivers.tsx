@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useState } from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import clsx from 'clsx';
+
 import Header from 'components/_common/Header/Header';
 import DriversTable from 'components/Drivers/DriversTable/DriversTable';
 import FooterPagination from 'components/Drivers/FooterPagination/FooterPagination';
 import Aside from 'components/_common/Aside/Aside';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import clsx from 'clsx';
-
-import makeClasses from 'components/Drivers/makeClasses';
+import useStyles from 'components/Drivers/DriversClasses';
 import styles from './Drivers.module.scss';
 
 interface IOwnProps {}
@@ -14,29 +14,27 @@ interface IOwnProps {}
 type Props = IOwnProps;
 
 const Drivers: FC<Props> = () => {
-  const classes = makeClasses();
-  const [open, setOpen] = React.useState(true);
+  const classes = useStyles();
+  const [isSidebarOpen, setSidebarVisibility] = useState(true);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const handleSidebarOpen = useCallback(() => {
+    setSidebarVisibility(true);
+  }, []);
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const handleSidebarClose = useCallback(() => {
+    setSidebarVisibility(false);
+  }, []);
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <Header
-        status={open}
-        handleDrawerOpen={handleDrawerOpen}
-        classes={classes}
+        isSidebarOpen={isSidebarOpen}
+        handleSidebarOpen={handleSidebarOpen}
       />
       <Aside
-        status={open}
-        handleDrawerClose={handleDrawerClose}
-        classes={classes}
+        isSidebarOpen={isSidebarOpen}
+        handleSidebarClose={handleSidebarClose}
       />
       <main className={clsx(classes.content, styles.main)}>
         <DriversTable />

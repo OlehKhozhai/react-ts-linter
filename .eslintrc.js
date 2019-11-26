@@ -27,7 +27,7 @@ module.exports = {
     '@typescript-eslint',
     'react-hooks',
   ],
-  globals: {},
+  // globals: {},
   rules: {
     // prettier
     'prettier/prettier': ['error'],
@@ -82,6 +82,6 @@ module.exports = {
         extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
       },
     },
-    'import/extensions': ['.js', '.ts', '.mjs', '.jsx', '.tsx'],
+    'import/extensions': ['.js', '.ts', '.jsx', '.tsx'],
   },
 };
